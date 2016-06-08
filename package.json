@@ -2,6 +2,9 @@
   "name": "memowise",
   "version": "0.5.2",
   "description": "",
+  "engines": {
+    "node": ">= 0.6.0"
+  },
   "scripts": {
     "clean": "rm -rf dev dist",
     "build": "npm run build-server-prod && npm run build-client-prod",
@@ -55,8 +58,7 @@
   },
   "dependencies": {
     "babel-cli": "^6.9.0",
-    "bcrypt": "^0.8.6",
-    "bcrypt-node": "^0.1.0",
+    "bcrypt": "0.8.6",
     "bluebird": "^3.4.0",
     "body-parser": "^1.15.1",
     "connect-mongo": "^1.2.0",
