@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import CourseInfo from './CourseInfo';
+import StudentsTab from './StudentsTab';
 
 // Presentational component that displays list of classes in teacher's view
 const Courses = ({ courses }) => (
@@ -7,7 +7,7 @@ const Courses = ({ courses }) => (
     <button>Add Class</button>
     <div>
       {courses.map(course =>
-        <CourseInfo key={course._id} course={course} />
+        <StudentsTab key={course._id} course={course} />
       )}
     </div>
   </div>
