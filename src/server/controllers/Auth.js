@@ -80,7 +80,7 @@ const checkAuthorized = (req, res) => {
 };
 
 const checkAuthServer = (req, res, next) => {
-  if (req.user) {
+  if (req.user) {   
     next();
   } else {
     res.status(401).json({ message: 'not logged in' });
