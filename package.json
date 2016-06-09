@@ -5,10 +5,10 @@
   "scripts": {
     "clean": "rm -rf dev dist",
     "build": "npm run build-server-prod && npm run build-client-prod",
-    "build-client-prod": "HOST=127.0.0.1 PORT=3333 PROTOCOL=http NODE_ENV=production webpack --progress",
-    "build-server-prod": "babel src/server -d dist/server",
+    "build-client-prod": "HOST=127.0.0.1 PORT=3333 PROTOCOL=http NODE_ENV=production webpack --progress --watch",
+    "build-server-prod": "babel --watch src/server -d dist/server",
     "watch-client": "webpack --progress --watch",
-    "watch-server": "babel --watch src/server -d dev/server",
+    "watch-server": "babel --watch src/server -d dist/server",
     "server-dev": "nodemon dev/server/server.js",
     "server-prod": "HOST=127.0.0.1 PORT=3333 PROTOCOL=http NODE_ENV=production node dist/server/server.js",
     "deploy:prod": "pm2 deploy ecosystem.json production",
@@ -48,9 +48,9 @@
     "sinon": "^1.17.4",
     "sinon-chai": "^2.8.0",
     "style-loader": "^0.13.1",
+    "supertest": "^1.2.0",
     "webpack": "^1.13.1",
-    "webpack-stream": "^3.2.0",
-    "supertest": "^1.2.0"
+    "webpack-stream": "^3.2.0"
   },
   "dependencies": {
     "babel-cli": "^6.9.0",
