@@ -21,7 +21,10 @@ import SignOut from './containers/SignOut';
 import Profile from './containers/Profile';
 import Dashboard from './containers/Dashboard';
 import StudyDeck from './containers/StudyDeck';
-import { verifyAuthentication, fetchDecks } from './actions';
+import Courses from './containers/Courses';
+import StudentsTab from './components/StudentsTab';
+import DecksTab from './components/DecksTab';
+import { verifyAuthentication, fetchDecks, fetchCourses } from './actions';
 
 // services
 import Auth from './services/AuthService';
@@ -57,6 +60,9 @@ render(
         <Route path="/profile" component={Profile} onEnter={isAuthorized} />
         <Route path="/dashboard" component={Dashboard} onEnter={isAuthorized} />
         <Route path="/decks/:deckId/study" component={StudyDeck} onEnter={isAuthorized} />
+        <Route path="/courses" component={Courses} onEnter={isAuthorized} />
+        <Route path="/courses/:courseId/students" component={StudentsTab} onEnter={isAuthorized} />
+        <Route path="/courses/:courseId/decks" component={DecksTab} onEnter={isAuthorized} />
       </Route>
     </Router>
   </Provider>,
@@ -69,6 +75,7 @@ if (DEBUG) {
 
 store.dispatch(verifyAuthentication());
 store.dispatch(fetchDecks());
+store.dispatch(fetchCourses());
 
 // just for inspection
 window.store = store;
