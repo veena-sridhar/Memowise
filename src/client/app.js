@@ -22,6 +22,8 @@ import Profile from './containers/Profile';
 import Dashboard from './containers/Dashboard';
 import StudyDeck from './containers/StudyDeck';
 import Courses from './containers/Courses';
+import StudentsTab from './components/StudentsTab';
+import DecksTab from './components/DecksTab';
 import { verifyAuthentication, fetchDecks, fetchCourses } from './actions';
 
 // services
