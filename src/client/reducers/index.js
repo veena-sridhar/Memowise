@@ -8,7 +8,8 @@ import {
   SIGN_IN,
   SIGN_OUT,
   ERR_FAILED_REQUEST,
-  RECEIVE_COURSES
+  RECEIVE_COURSES,
+  SELECT_COURSE
 } from '../constants/actionTypes';
 
 import {
@@ -106,5 +107,15 @@ export const courses = (state, action) => {
     }
     default:
       return state || [];
+  }
+};
+
+export const course = (state, action) => {
+  switch (action.type) {
+    case SELECT_COURSE: {
+      return action.data || state;
+    }
+    default:
+      return state || {};
   }
 };

@@ -74,6 +74,7 @@ export const savePlay = (play, rating) => {
 };
 
 export const receiveCourses = courses => ({ type: types.RECEIVE_COURSES, data: courses });
+export const selectCourse = course => ({ type: types.SELECT_COURSE, data: course });
 export const fetchCourses = () => (
   dispatch => (
     fetch(`${url}/api/courses`, {
@@ -83,3 +84,5 @@ export const fetchCourses = () => (
     .then(courses => dispatch(receiveCourses(courses)))
     .catch(err => dispatch(failedRequest(err)))
   ));
+
+
