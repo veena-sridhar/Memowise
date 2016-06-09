@@ -47,23 +47,37 @@ const addStudentToCourse = (req, res) => {
   });
 };
 
-const getStudentsForCourse = (req, res) => {
+const getStudentsForCourse = (req, res) => { //currently any user who knew the course ID you could retrieve this info; for better security, you should need to be the appropriate teacher in order to retrieve your courses
   Course.findOne({_id: req.params.courseId})
   .then(course => {
-    console.log(course);
-    // studentsToFind = course.studentIds.map()
     User.find(
-      {_id: { $in: [course.studentIds] }}
+      {_id: { $in: course.studentIds }}
     )
     .then(students => {
-      console.log(students);
-      course.students = students;
+      const mappedStudents = students.map(student => {
+        return {
+          _id: student._id,
+          name: student.name,
+          email: student.email
+        };
+      });
+      const response = {
+        _id: course._id,
+        courseName: course.courseName,
+        students: mappedStudents
+      };
       res
         .status(200)
         .type('json')
-        .json(course);
-    });
-  })
+        .json(response);
+      })
+      .catch(error => {
+      res
+        .status(500)
+        .type('json')
+        .json({ error });
+      });
+   }) 
   .catch(error => {
     res
       .status(500)
