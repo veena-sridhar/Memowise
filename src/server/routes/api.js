@@ -3,6 +3,7 @@ import { Router } from 'express';
 // controllers
 import decks from '../controllers/Decks';
 import plays from '../controllers/Plays';
+import courses from '../controllers/Courses';
 import auth from '../controllers/Auth';
 
 const router = new Router();
@@ -19,6 +20,12 @@ router.route('/api/progress').post(auth.checkAuthServer, decks.progress);
  */
 router.route('/api/play').post(auth.checkAuthServer, plays.create);
 router.route('/api/last-play/deck/:deckId').get(auth.checkAuthServer, plays.findLatest);
+
+/*
+ * Courses
+ */
+router.route('/api/courses').post(auth.checkAuthServer, courses.addCourse);
+router.route('/api/courses').get(auth.checkAuthServer, courses.getCourses);
 
 /*
  * Auth
