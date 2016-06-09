@@ -17,8 +17,7 @@ const addCourse = (req, res) => {
 };
 
 const getCourses = (req, res) => {
-  Course.find({teacherId: req.user._id}).then((courses) => {  //teacherID: '5758dd2a0fe3293550c9a40d'
-
+  Course.find({teacherId: req.user._id}).then((courses) => {  
     res
       .status(200)
       .type('json')

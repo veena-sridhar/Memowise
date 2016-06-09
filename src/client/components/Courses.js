@@ -6,15 +6,9 @@ class Courses extends React.Component {
   constructor(props) {
     super(props);
 
-    this.getCourseInfo = this.getCourseInfo.bind(this);
-    this.addCourse = this.addCourse.bind(this);
   }
 
   getCourseInfo() {
-
-  }
-
-  addCourse() {
 
   }
 
@@ -24,7 +18,7 @@ class Courses extends React.Component {
         <AddCourse />
         <div>
           {this.props.courses.map(course =>
-            <div onClick={this.getCourseInfo}>{course.courseName}</div>
+            <div>{course.courseName}</div>
           )}
         </div>
       </div>

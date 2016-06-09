@@ -85,4 +85,23 @@ export const fetchCourses = () => (
     .catch(err => dispatch(failedRequest(err)))
   ));
 
+export const addCourse = (courseName) => {
+  const payload = JSON.stringify({ courseName });
+
+  return dispatch => (
+    fetch(`${url}/api/courses`, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+        'Content-length': payload.length,
+      },
+      credentials: 'same-origin',
+      body: payload,
+    })
+    .then(() => dispatch({ type: types.ADD_COURSE, data: courseName }))
+    .then(() => dispatch(fetchCourses()))
+    .catch(err => dispatch(failedRequest(err)))
+  );
+};
+
 
