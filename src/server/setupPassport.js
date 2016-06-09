@@ -40,7 +40,7 @@ export default () => {
               message: 'Incorrect password',
             });
           }
-          return done(null, { _id: user[oid], name: user.name, email: user.email});
+          return done(null, { _id: user[oid], name: user.name, email: user.email, isTeacher: user.isTeacher});
         });
       });
     }));
