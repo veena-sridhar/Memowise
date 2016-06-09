@@ -13,4 +13,8 @@ const Courses = ({ courses }) => (
   </div>
 );
 
+Courses.propTypes = {
+  courses: PropTypes.array.isRequired,
+};
+
 export default Courses;

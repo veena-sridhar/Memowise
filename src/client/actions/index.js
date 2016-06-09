@@ -72,3 +72,14 @@ export const savePlay = (play, rating) => {
     .catch(err => dispatch(failedRequest(err)))
   );
 };
+
+export const receiveCourses = courses => ({ type: types.RECEIVE_COURSES, data: courses });
+export const fetchCourses = () => (
+  dispatch => (
+    fetch(`${url}/api/courses`, {
+      credentials: 'same-origin',
+    })
+    .then(res => res.json())
+    .then(courses => dispatch(receiveCourses(courses)))
+    .catch(err => dispatch(failedRequest(err)))
+  ));
