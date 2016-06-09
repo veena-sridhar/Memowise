@@ -102,4 +102,13 @@ export const addCourse = (courseName) => {
   );
 };
 
-
+export const receiveStudents = students => ({ type: types.RECEIVE_STUDENTS, data: students });
+export const fetchStudents = (courseId) => (
+  dispatch => (
+    fetch(`${url}/api/courses/${courseId}/students`, {
+      credentials: 'same-origin',
+    })
+    .then(res => res.json())
+    .then(students => dispatch(receiveStudents(students)))
+    .catch(err => dispatch(failedRequest(err)))
+  ));
