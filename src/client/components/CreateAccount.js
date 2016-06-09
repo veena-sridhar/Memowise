@@ -20,6 +20,8 @@ class CreateAccount extends React.Component {
       name: '',
       email: '',
       password: '',
+      teacher: false,
+      code: ''
     };
 
     this.handleError = this.handleError.bind(this);
@@ -27,6 +29,8 @@ class CreateAccount extends React.Component {
     this.handleEmailInput = this.handleEmailInput.bind(this);
     this.handlePasswordInput = this.handlePasswordInput.bind(this);
     this.createAccount = this.createAccount.bind(this);
+    this.handleCheckboxInput = this.handleCheckboxInput.bind(this);
+    this.handleCodeInput = this.handleCodeInput.bind(this);
   }
 
   handleNameInput(event) {
@@ -41,6 +45,16 @@ class CreateAccount extends React.Component {
     this.setState({ password: event.target.value });
   }
 
+  handleCheckboxInput() {
+    this.setState({ teacher: !this.state.teacher }).then(function () {
+
+    });
+  }
+
+  handleCodeInput (event) {
+    this.setState({ code: event.target.value });
+  }
+
   handleError(err) {
     Materialize.toast(`Failed to create account: ${err.responseJSON.message}`, 4000);
   }
@@ -51,6 +65,8 @@ class CreateAccount extends React.Component {
       name: this.state.name,
       email: this.state.email,
       password: this.state.password,
+      teacher: this.state.teacher,
+      code: this.state.code
     };
     $.post('/api/auth/create-account', newUser, () => {
       Auth.signIn(this.state.email, this.state.password)
@@ -94,7 +110,7 @@ class CreateAccount extends React.Component {
                   type="email"
                   className="validate"
                   value={this.state.email}
-                  onChange={this.handleEmailInput}
+                  onChange={() => {this.handleEmailInput(); }}
                 />
                 <label htmlFor="email">Email</label>
               </div>
@@ -114,6 +130,19 @@ class CreateAccount extends React.Component {
                 <label htmlFor="password">Password</label>
               </div>
             </div>
+            <div className="row">
+              <div className="col s12">
+                <input
+                  ref="teacher"
+                  type="checkbox"
+                  className="checkBox"
+                  id='test5'
+                  onClick={this.handleCheckboxInput}
+                />
+                <label htmlFor="test5">I am a teacher</label>
+              </div>
+            </div>
+            <CodeBox state={this.state}/>
             <div className="row center">
               <div className="col s12">
                 <button type="submit" className="btn-large cyan lighten-3">
@@ -122,6 +151,30 @@ class CreateAccount extends React.Component {
               </div>
             </div>
           </form>
+        </div>
+      </div>
+    );
+  }
+}
+
+class CodeBox extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render () {
+    return (
+      <div className="row">
+        <div className="input-field col s12">
+          <input
+            required
+            ref="name"
+            type="text"
+            className="validate"
+            value={this.props.code}
+            title="please enter your teacher code"
+          />
+          <label htmlFor="code">Teacher Code</label>
         </div>
       </div>
     );
