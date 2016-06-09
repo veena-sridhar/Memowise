@@ -26,6 +26,8 @@ router.route('/api/last-play/deck/:deckId').get(auth.checkAuthServer, plays.find
  */
 router.route('/api/courses').post(auth.checkAuthServer, courses.addCourse);
 router.route('/api/courses').get(auth.checkAuthServer, courses.getCourses);
+router.route('/api/courses/:courseId/students').post(courses.addStudentToCourse); //auth.checkAuthServer, 
+router.route('/api/courses/:courseId/students').get(courses.getStudentsForCourse); //auth.checkAuthServer,
 
 /*
  * Auth
