@@ -11,7 +11,8 @@ class Courses extends React.Component {
   }
 
   getCourseInfo(course) {
-    browserHistory.push(`/courses/${course.courseId}/students`);
+    console.log('course >>>>', course);
+    browserHistory.push(`/courses/${course._id}/students`);
   }
 
   render() {
@@ -20,7 +21,7 @@ class Courses extends React.Component {
         <AddCourse />
         <div>
           {this.props.courses.map(course =>
-            <div onClick={this.getCourseInfo}>{course.courseName}</div>
+            <div onClick={() => {this.getCourseInfo(course)}}>{course.courseName}</div>
           )}
         </div>
       </div>
