@@ -20,6 +20,8 @@ class CreateAccount extends React.Component {
       name: '',
       email: '',
       password: '',
+      isTeacher: false,
+      teacherCode: ''
     };
 
     this.handleError = this.handleError.bind(this);
@@ -27,6 +29,8 @@ class CreateAccount extends React.Component {
     this.handleEmailInput = this.handleEmailInput.bind(this);
     this.handlePasswordInput = this.handlePasswordInput.bind(this);
     this.createAccount = this.createAccount.bind(this);
+    this.handleCheckboxInput = this.handleCheckboxInput.bind(this);
+    this.handleCodeInput = this.handleCodeInput.bind(this);
   }
 
   handleNameInput(event) {
@@ -41,6 +45,14 @@ class CreateAccount extends React.Component {
     this.setState({ password: event.target.value });
   }
 
+  handleCheckboxInput() {
+    this.setState({ isTeacher: !this.state.isTeacher });
+  }
+
+  handleCodeInput (event) {
+    this.setState({ teacherCode: event.target.value });
+  }
+
   handleError(err) {
     Materialize.toast(`Failed to create account: ${err.responseJSON.message}`, 4000);
   }
@@ -51,8 +63,11 @@ class CreateAccount extends React.Component {
       name: this.state.name,
       email: this.state.email,
       password: this.state.password,
+      isTeacher: this.state.isTeacher,
+      teacherCode: this.state.teacherCode
     };
     $.post('/api/auth/create-account', newUser, () => {
+      console.log('newUser profile is:', newUser);
       Auth.signIn(this.state.email, this.state.password)
         .then(user => {
           this.props.onSignIn(user);
@@ -114,6 +129,32 @@ class CreateAccount extends React.Component {
                 <label htmlFor="password">Password</label>
               </div>
             </div>
+            <div className="row">
+              <div className="col s12">
+                <input
+                  ref="isTeacher"
+                  type="checkbox"
+                  className="checkBox"
+                  id='test5'
+                  onClick={this.handleCheckboxInput}
+                />
+                <label htmlFor="test5">I am a teacher</label>
+              </div>
+            </div>
+            {this.state.isTeacher ? <div className="row">
+              <div className="input-field col s12">
+                <input
+                  required
+                  ref="teacherCode"
+                  type="text"
+                  className="validate"
+                  value={this.state.teacherCode}
+                  title="please enter your teacher code"
+                  onChange={this.handleCodeInput}
+                />
+                <label htmlFor="teacherCode">Teacher Code</label>
+              </div>
+            </div> : <div></div>}
             <div className="row center">
               <div className="col s12">
                 <button type="submit" className="btn-large cyan lighten-3">
