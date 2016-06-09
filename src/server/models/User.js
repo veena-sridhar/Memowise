@@ -19,7 +19,7 @@ const UserSchema = new mongoose.Schema({
     ],
   },
   isTeacher: Boolean,
-  classIds: [],
+  courseIds: [],
 }, { timestamps: true });
 
 UserSchema.pre('save', function hashPassword(next) {
