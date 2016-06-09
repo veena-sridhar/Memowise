@@ -59,6 +59,8 @@ render(
         <Route path="/dashboard" component={Dashboard} onEnter={isAuthorized} />
         <Route path="/decks/:deckId/study" component={StudyDeck} onEnter={isAuthorized} />
         <Route path="/courses" component={Courses} onEnter={isAuthorized} />
+        <Route path="/courses/:courseId/students" component={StudentsTab} onEnter={isAuthorized} />
+        <Route path="/courses/:courseId/decks" component={DecksTab} onEnter={isAuthorized} />
       </Route>
     </Router>
   </Provider>,
