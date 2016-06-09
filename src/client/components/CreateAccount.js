@@ -21,7 +21,7 @@ class CreateAccount extends React.Component {
       email: '',
       password: '',
       isTeacher: false,
-      teacherCode: '',
+      teacherCode: ''
     };
 
     this.handleError = this.handleError.bind(this);
