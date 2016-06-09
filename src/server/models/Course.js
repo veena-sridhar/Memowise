@@ -1,7 +1,7 @@
 import mongoose from '../db';
 
 const CourseSchema = new mongoose.Schema({
-  name: String,
+  courseName: String,
   teacherId: String,
   studentIds:[],
   deckIds:[]
