@@ -21,7 +21,7 @@ class CreateAccount extends React.Component {
       email: '',
       password: '',
       teacher: false,
-      code: ''
+      code: '',
     };
 
     this.handleError = this.handleError.bind(this);
@@ -46,9 +46,7 @@ class CreateAccount extends React.Component {
   }
 
   handleCheckboxInput() {
-    this.setState({ teacher: !this.state.teacher }).then(function () {
-
-    });
+    this.setState({ teacher: !this.state.teacher });
   }
 
   handleCodeInput (event) {
@@ -69,6 +67,7 @@ class CreateAccount extends React.Component {
       code: this.state.code
     };
     $.post('/api/auth/create-account', newUser, () => {
+      console.log('newUser profile is:', newUser);
       Auth.signIn(this.state.email, this.state.password)
         .then(user => {
           this.props.onSignIn(user);
@@ -110,7 +109,7 @@ class CreateAccount extends React.Component {
                   type="email"
                   className="validate"
                   value={this.state.email}
-                  onChange={() => {this.handleEmailInput(); }}
+                  onChange={this.handleEmailInput}
                 />
                 <label htmlFor="email">Email</label>
               </div>
@@ -142,7 +141,20 @@ class CreateAccount extends React.Component {
                 <label htmlFor="test5">I am a teacher</label>
               </div>
             </div>
-            <CodeBox state={this.state}/>
+            {this.state.teacher ? <div className="row">
+              <div className="input-field col s12">
+                <input
+                  required
+                  ref="code"
+                  type="text"
+                  className="validate"
+                  value={this.state.code}
+                  title="please enter your teacher code"
+                  onChange={this.handleCodeInput}
+                />
+                <label htmlFor="code">Teacher Code</label>
+              </div>
+            </div> : <div></div>}
             <div className="row center">
               <div className="col s12">
                 <button type="submit" className="btn-large cyan lighten-3">
@@ -157,29 +169,29 @@ class CreateAccount extends React.Component {
   }
 }
 
-class CodeBox extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+// class CodeBox extends React.Component {
+//   constructor(props) {
+//     super(props);
+//   }
 
-  render () {
-    return (
-      <div className="row">
-        <div className="input-field col s12">
-          <input
-            required
-            ref="name"
-            type="text"
-            className="validate"
-            value={this.props.code}
-            title="please enter your teacher code"
-          />
-          <label htmlFor="code">Teacher Code</label>
-        </div>
-      </div>
-    );
-  }
-}
+//   render () {
+//     return (
+//       <div className="row">
+//         <div className="input-field col s12">
+//           <input
+//             required
+//             ref="name"
+//             type="text"
+//             className="validate"
+//             value={this.props.code}
+//             title="please enter your teacher code"
+//           />
+//           <label htmlFor="code">Teacher Code</label>
+//         </div>
+//       </div>
+//     );
+//   }
+// }
 
 CreateAccount.propTypes = {
   onSignIn: React.PropTypes.func,
