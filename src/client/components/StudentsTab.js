@@ -1,18 +1,13 @@
 import React, { PropTypes } from 'react';
-import ClassTabs from './ClassTabs';
+// import ClassTabs from './ClassTabs';
+import AddStudent from '../containers/AddStudent';
 
-const StudentsTab = ({ classInfo }) => {
-  let students = classInfo.students.map(student => 
-    <div>{student.name}</div>
-  );
+const StudentsTab = () => {
 
   return (
     <div className="container">
-      <div>{classInfo.name}</div>
-      <ClassTabs />
-      <button>Add Student</button>
+      <AddStudent />
       <div>
-        {students}
       </div>
     </div>
   );
