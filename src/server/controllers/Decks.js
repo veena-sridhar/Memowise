@@ -4,8 +4,6 @@ import Course from '../models/Course';
 import getCard from '../services/DeckProgress';
 import getProgress from '../services/ProgressBar.js';
 
-// const async = require('async');
-
 const findAll = (req, res) => {
   Deck.find({}).then((decks) => {
     res
