@@ -1,5 +1,6 @@
 import Course from '../models/Course';
 import User from '../models/User';
+import Deck from '../models/Deck';
 
 const addCourse = (req, res) => {
   return Course.create({
@@ -86,7 +87,54 @@ const getStudentsForCourse = (req, res) => { //currently any user who knew the c
   });
 };
 
-//will need to get course for both students and for decks, so that should be its own thing
-//can chain on the appropriate then 
+const addDeckToCourse = (req, res) => {  
+  Course.update(
+    {_id:  req.params.courseId}, //ObjectId(
+    {$addToSet: {deckIds: req.body._id}}
+  ).then(course => {
+    res.status(201).json(course);
+  })
+  .catch(error => {
+    res
+      .status(500)
+      .type('json')
+      .json({ error });
+  });
+};
 
-export default { addCourse, getCourses, addStudentToCourse, getStudentsForCourse };
+const getDecksForCourse = (req, res) => { //currently any user who knew the course ID you could retrieve this info; for better security, you should need to be the appropriate teacher in order to retrieve your courses
+  Course.findOne({_id: req.params.courseId})
+  .then(course => {
+    console.log('course:', course);
+    Deck.find(
+      {_id: { $in: course.deckIds }}
+    )
+    .then(decks => {
+      console.log('decks:', decks);
+      const response = {
+        _id: course._id,
+        courseName: course.courseName,
+        decks: decks
+      };
+      res
+        .status(200)
+        .type('json')
+        .json(response);
+      })
+      .catch(error => {
+      res
+        .status(500)
+        .type('json')
+        .json({ error });
+      });
+   }) 
+  .catch(error => {
+    res
+      .status(500)
+      .type('json')
+      .json({ error });
+  });
+};
+
+
+export default { addCourse, getCourses, addStudentToCourse, getStudentsForCourse, addDeckToCourse, getDecksForCourse };
