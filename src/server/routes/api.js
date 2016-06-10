@@ -32,6 +32,7 @@ router.route('/api/courses/:courseId/students').get(auth.checkAuthServer, course
 router.route('/api/courses/:courseId/decks').post(auth.checkAuthServer, courses.addDeckToCourse); 
 router.route('/api/courses/:courseId/decks').get(auth.checkAuthServer, courses.getDecksForCourse); 
 
+
 /*
  * Auth
  */

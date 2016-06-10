@@ -34,11 +34,21 @@ const getCourses = (req, res) => {
 };
 
 const addStudentToCourse = (req, res) => {  
-  Course.update(
-    {_id:  req.params.courseId}, //ObjectId(
-    {$addToSet: {studentIds: req.body._id}}
-  ).then(course => {
-    res.status(201).json(course);
+  User.findOne({email: req.body.email})
+  .then(studentToAdd => {
+    Course.update(
+      {_id:  req.params.courseId},
+      {$addToSet: {studentIds: studentToAdd._id}}
+    )
+    .then(course => {
+      res.status(201).json({message: 'Student successfully added to course!'});
+    })
+    .catch(error => {
+      res
+        .status(500)
+        .type('json')
+        .json({ error });
+    });
   })
   .catch(error => {
     res
