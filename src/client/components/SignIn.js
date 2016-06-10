@@ -37,7 +37,11 @@ class SignIn extends React.Component {
       .then(user => {
         // TODO: refactor to use push action creator
         this.props.onSignIn(user);
-        browserHistory.push('/dashboard');
+        if (user.isTeacher) {
+          browserHistory.push('/courses');
+        } else {
+          browserHistory.push('/dashboard');
+        }
       })
       .catch(this.handleError);
   }
