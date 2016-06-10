@@ -12,6 +12,7 @@ const router = new Router();
  * Decks
  */
 router.route('/api/decks').get(auth.checkAuthServer, decks.findAll);
+router.route('/api/decks/courses').get(auth.checkAuthServer, decks.getDecksForStudent); 
 router.route('/api/card').post(auth.checkAuthServer, decks.findNextCard);
 router.route('/api/progress').post(auth.checkAuthServer, decks.progress);
 
@@ -26,8 +27,11 @@ router.route('/api/last-play/deck/:deckId').get(auth.checkAuthServer, plays.find
  */
 router.route('/api/courses').post(auth.checkAuthServer, courses.addCourse);
 router.route('/api/courses').get(auth.checkAuthServer, courses.getCourses);
-router.route('/api/courses/:courseId/students').post(auth.checkAuthServer, courses.addStudentToCourse);  
-router.route('/api/courses/:courseId/students').get(auth.checkAuthServer, courses.getStudentsForCourse); 
+router.route('/api/courses/:courseId/students').post(auth.checkAuthServer, courses.addStudentToCourse);
+router.route('/api/courses/:courseId/students').get(auth.checkAuthServer, courses.getStudentsForCourse);
+router.route('/api/courses/:courseId/decks').post(auth.checkAuthServer, courses.addDeckToCourse); 
+router.route('/api/courses/:courseId/decks').get(auth.checkAuthServer, courses.getDecksForCourse); 
+
 
 /*
  * Auth
