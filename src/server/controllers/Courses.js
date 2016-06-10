@@ -80,19 +80,11 @@ const getStudentsForCourse = (req, res) => {
         courseName: course.courseName,
         students: mappedStudents
       };
-      const fakeData = {
-        _id: '5759d0dfc30165e3c9430c80',
-        courseName: 'Psychology',
-        students: [
-        {_id: '11',
-          name: 'Tegan',
-          email: 'tegan@yahoo.com'}
-        ]
-      };
+      
       res
         .status(200)
         .type('json')
-        .json(fakeData);
+        .json(response);
       })
       .catch(error => {
       res

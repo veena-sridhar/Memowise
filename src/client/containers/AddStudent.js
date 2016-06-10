@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { addStudent } from '../actions'
 
-let AddStudent = ({ dispatch }) => {
+let AddStudent = ({ dispatch, courseId }) => {
   let input
 
   return (
@@ -12,7 +12,7 @@ let AddStudent = ({ dispatch }) => {
         if (!input.value.trim()) {
           return
         }
-        dispatch(addStudent(input.value))
+        dispatch(addStudent(courseId, input.value))
         input.value = ''
       }}>
         <input ref={node => {

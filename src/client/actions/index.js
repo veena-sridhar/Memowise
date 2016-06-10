@@ -104,20 +104,32 @@ export const addCourse = (courseName) => {
 
 export const receiveStudents = students => ({ type: types.RECEIVE_STUDENTS, data: students });
 export const fetchStudents = (courseId) => {
-  const payload = JSON.stringify({ courseId });
+
+  return dispatch => (
+    fetch(`${url}/api/courses/${courseId}/students`, {
+      credentials: 'same-origin'
+    })
+    .then(res => res.json())
+    .then(students => dispatch(receiveStudents(students)))
+    .catch(err => dispatch(failedRequest(err)))
+  );
+};
+
+export const addStudent = (courseId, email) => {
+  const payload = JSON.stringify({ email });
 
   return dispatch => (
     fetch(`${url}/api/courses/${courseId}/students`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
-        'Content-length': payload.length,
+        'Content-length': payload.length
       },
       credentials: 'same-origin',
       body: payload,
     })
-    .then(res => res.json())
-    .then(courseInfo => dispatch(receiveStudents(courseInfo)))
+    .then(() => dispatch({ type: types.ADD_STUDENT, data: email }))
+    .then(() => dispatch(fetchStudents(courseId)))
     .catch(err => dispatch(failedRequest(err)))
   );
 };

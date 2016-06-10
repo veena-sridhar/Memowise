@@ -76,6 +76,7 @@ if (DEBUG) {
 store.dispatch(verifyAuthentication());
 store.dispatch(fetchDecks());
 store.dispatch(fetchCourses());
+store.dispatch(fetchStudents());
 
 // just for inspection
 window.store = store;

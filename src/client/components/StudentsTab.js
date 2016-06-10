@@ -11,10 +11,10 @@ class StudentsTab extends React.Component {
     console.log('this.props.students: ', this.props.students);
     return (
       <div className="container">
-        <AddStudent />
+        <AddStudent courseId={this.props.params.courseId} />
         <div>
           {this.props.students.map(student =>
-            <div>{student.name}</div>
+            <div>{student}</div>
           )}
         </div>
       </div>
