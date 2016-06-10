@@ -1,20 +1,23 @@
 import React, { PropTypes } from 'react';
 import AddCourse from '../containers/AddCourse';
 import { browserHistory } from 'react-router';
+import CourseInfo from './CourseInfo';
 
 // Presentational component that displays list of classes in teacher's view
 class Courses extends React.Component {
   constructor(props) {
     super(props);
 
-    this.getCourseInfo = this.getCourseInfo.bind(this);
+    // this.handleCourseClick = this.handleCourseClick.bind(this);
   }
 
-  getCourseInfo(course) {
-    console.log('course >>>>', course);
-    // this.props.onCourseClick(this.props.course);
-    browserHistory.push(`/courses/${course._id}/students`);
-  }
+  // handleCourseClick(course) {
+  //   console.log('course >>>>', course);
+  //   this.props.dispatch(selectCourse(course))
+  //   // this.props.onCourseClick(this.props.course);
+  //   // this.props.fetchStudents(course._id);
+  //   browserHistory.push(`/courses/${course._id}/students`);
+  // }
 
   render() {
     return (
@@ -22,7 +25,9 @@ class Courses extends React.Component {
         <AddCourse />
         <div>
           {this.props.courses.map(course =>
-            <div onClick={() => {this.getCourseInfo(course)}}>{course.courseName}</div>
+            <CourseInfo 
+            course={course}
+            />
           )}
         </div>
       </div>
