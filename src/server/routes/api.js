@@ -12,7 +12,7 @@ const router = new Router();
  * Decks
  */
 router.route('/api/decks').get(auth.checkAuthServer, decks.findAll);
-router.route('/api/decks/courses').get(decks.getDecksForStudent); //auth.checkAuthServer, 
+router.route('/api/decks/courses').get(auth.checkAuthServer, decks.getDecksForStudent); 
 router.route('/api/card').post(auth.checkAuthServer, decks.findNextCard);
 router.route('/api/progress').post(auth.checkAuthServer, decks.progress);
 

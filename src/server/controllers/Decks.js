@@ -22,8 +22,8 @@ const findAll = (req, res) => {
 const getDecksForStudent = (req,res) => {
   Course.find()
   .then(courses => {
-    const coursesForStudent = courses.reduce((filtered, course) => { //fuck it, do it w/ reduce
-      if (course.studentIds.indexOf('575a2e0214bbb55570798ffc') > -1) { //req.user._id
+    const coursesForStudent = courses.reduce((filtered, course) => { 
+      if (course.studentIds.indexOf(req.user._id) > -1) { 
         filtered.push(course);
       }
       return filtered; 
