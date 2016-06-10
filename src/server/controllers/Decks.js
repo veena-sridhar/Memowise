@@ -15,10 +15,6 @@ const findAll = (req, res) => {
   });
 };
 
-//get all classes
-//reject those w/o the relevant student id
-//flatten to [{deck, course], ... (one for each course)}
-//for each one, iterate over the decks to build up that key value pair in the object (async map)
 const getDecksForStudent = (req,res) => {
   Course.find()
   .then(courses => {
