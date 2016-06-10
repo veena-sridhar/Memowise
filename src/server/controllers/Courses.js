@@ -36,7 +36,7 @@ const addStudentToCourse = (req, res) => {
   User.findOne({email: req.body.email})
   .then(studentToAdd => {
     Course.update(
-      {_id:  req.params.courseId}, //ObjectId(
+      {_id:  req.params.courseId},
       {$addToSet: {studentIds: studentToAdd._id}}
     )
     .then(course => {
