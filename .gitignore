@@ -21,6 +21,8 @@ coverage
 # Error log
 npm-debug.log
 
+#files
+package.json
 
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
 .grunt
@@ -38,3 +40,4 @@ bower_components/
 
 # Local aliases
 .gitaliases
+

@@ -72,3 +72,36 @@ export const savePlay = (play, rating) => {
     .catch(err => dispatch(failedRequest(err)))
   );
 };
+
+export const receiveCourses = courses => ({ type: types.RECEIVE_COURSES, data: courses });
+export const selectCourse = course => ({ type: types.SELECT_COURSE, data: course });
+export const fetchCourses = () => (
+  dispatch => (
+    fetch(`${url}/api/courses`, {
+      credentials: 'same-origin',
+    })
+    .then(res => res.json())
+    .then(courses => dispatch(receiveCourses(courses)))
+    .catch(err => dispatch(failedRequest(err)))
+  ));
+
+export const addCourse = (courseName) => {
+  const payload = JSON.stringify({ courseName });
+
+  return dispatch => (
+    fetch(`${url}/api/courses`, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+        'Content-length': payload.length,
+      },
+      credentials: 'same-origin',
+      body: payload,
+    })
+    .then(() => dispatch({ type: types.ADD_COURSE, data: courseName }))
+    .then(() => dispatch(fetchCourses()))
+    .catch(err => dispatch(failedRequest(err)))
+  );
+};
+
+

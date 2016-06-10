@@ -10,21 +10,36 @@ const createAccount = (req, res) => {
         .json({ message: 'User with same email already exists' });
     }
 
-    return User.create({
-      name: req.body.name,
-      email: req.body.email,
-      password: req.body.password,
-    }).then(user => {
-      const created = user.toObject();
-      delete created.password;
-      res.status(201).json(created);
-    })
-    .catch(error => {
-      res
-        .status(500)
-        .type('json')
-        .json({ error });
-    });
+    var isTeacher = false;
+    if (req.body.isTeacher === 'true') {
+      if (req.body.teacherCode === 'xyz456') {
+        isTeacher = true;
+      } else {
+        isTeacher = 'error';
+      }
+    }
+
+    if (typeof isTeacher === 'boolean') {
+
+      return User.create({
+        name: req.body.name,
+        email: req.body.email,
+        password: req.body.password,
+        isTeacher: isTeacher
+      }).then(user => {
+        const created = user.toObject();
+        delete created.password;
+        res.status(201).json(created);
+      })
+      .catch(error => {
+        res
+          .status(500)
+          .type('json')
+          .json({ error });
+      });
+    } else {
+      res.status(500).send('incorrect teacher code');
+    }
   });
 };
 
@@ -65,7 +80,7 @@ const checkAuthorized = (req, res) => {
 };
 
 const checkAuthServer = (req, res, next) => {
-  if (req.user) {
+  if (req.user) {   
     next();
   } else {
     res.status(401).json({ message: 'not logged in' });

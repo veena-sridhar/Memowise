@@ -1,4 +1,5 @@
 import Deck from '../models/Deck';
+import Course from '../models/Course';
 
 import getCard from '../services/DeckProgress';
 import getProgress from '../services/ProgressBar.js';
@@ -9,6 +10,40 @@ const findAll = (req, res) => {
       .status(200)
       .type('json')
       .json(decks);
+  });
+};
+
+const getDecksForStudent = (req,res) => {
+  Course.find()
+  .then(courses => {
+    const coursesForStudent = courses.reduce((filtered, course) => { 
+      if (course.studentIds.indexOf(req.user._id) > -1) { 
+        filtered.push(course);
+      }
+      return filtered; 
+    }, []);
+
+    Deck.find()
+    .then(decks => {
+      let toSend = coursesForStudent.reduce((response, course) => {
+        let decksWithNames = course.deckIds.map(deckId => {
+          let deckName = decks.reduce((deckName, possiblyMatchingDeck) => {
+            if (deckId.toString() === possiblyMatchingDeck._id.toString()) {
+              return possiblyMatchingDeck.name;
+            }
+            return deckName;
+          }, null);
+          return {_id: deckId, name: deckName};
+        });
+        response[course.courseName] = decksWithNames;
+        return response;
+      }, {});
+
+      res
+        .status(200)
+        .type('json')
+        .json(toSend);
+    });
   });
 };
 
@@ -30,4 +65,4 @@ const progress = (req, res) => {
   });
 };
 
-export default { findAll, findNextCard, progress };
+export default { findAll, findNextCard, progress, getDecksForStudent };
