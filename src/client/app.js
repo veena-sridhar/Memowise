@@ -22,9 +22,9 @@ import Profile from './containers/Profile';
 import Dashboard from './containers/Dashboard';
 import StudyDeck from './containers/StudyDeck';
 import Courses from './containers/Courses';
-import StudentsTab from './components/StudentsTab';
+import Students from './containers/Students';
 import DecksTab from './components/DecksTab';
-import { verifyAuthentication, fetchDecks, fetchCourses } from './actions';
+import { verifyAuthentication, fetchDecks, fetchCourses, fetchStudents } from './actions';
 
 // services
 import Auth from './services/AuthService';
@@ -61,7 +61,7 @@ render(
         <Route path="/dashboard" component={Dashboard} onEnter={isAuthorized} />
         <Route path="/decks/:deckId/study" component={StudyDeck} onEnter={isAuthorized} />
         <Route path="/courses" component={Courses} onEnter={isAuthorized} />
-        <Route path="/courses/:courseId/students" component={StudentsTab} onEnter={isAuthorized} />
+        <Route path="/courses/:courseId/students" component={Students} onEnter={isAuthorized} />
         <Route path="/courses/:courseId/decks" component={DecksTab} onEnter={isAuthorized} />
       </Route>
     </Router>

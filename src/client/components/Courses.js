@@ -12,6 +12,7 @@ class Courses extends React.Component {
 
   getCourseInfo(course) {
     console.log('course >>>>', course);
+    // this.props.onCourseClick(this.props.course);
     browserHistory.push(`/courses/${course._id}/students`);
   }
 

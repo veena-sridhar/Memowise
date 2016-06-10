@@ -58,7 +58,10 @@ const addStudentToCourse = (req, res) => {
   });
 };
 
-const getStudentsForCourse = (req, res) => { //currently any user who knew the course ID you could retrieve this info; for better security, you should need to be the appropriate teacher in order to retrieve your courses
+const getStudentsForCourse = (req, res) => { 
+  console.log('req.body in getStudentsForCourse: ', req.body);
+  console.log('req.params in getStudentsForCourse: ', req.params);
+//currently any user who knew the course ID you could retrieve this info; for better security, you should need to be the appropriate teacher in order to retrieve your courses
   Course.findOne({_id: req.params.courseId})
   .then(course => {
     User.find(
@@ -77,10 +80,19 @@ const getStudentsForCourse = (req, res) => { //currently any user who knew the c
         courseName: course.courseName,
         students: mappedStudents
       };
+      const fakeData = {
+        _id: '5759d0dfc30165e3c9430c80',
+        courseName: 'Psychology',
+        students: [
+        {_id: '11',
+          name: 'Tegan',
+          email: 'tegan@yahoo.com'}
+        ]
+      };
       res
         .status(200)
         .type('json')
-        .json(response);
+        .json(fakeData);
       })
       .catch(error => {
       res
