@@ -145,7 +145,7 @@ class CreateAccount extends React.Component {
                 <input
                   required
                   ref="teacherCode"
-                  type="text"
+                  type="password"
                   className="validate"
                   value={this.state.teacherCode}
                   title="please enter your teacher code"
