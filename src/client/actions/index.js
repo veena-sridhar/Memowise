@@ -25,7 +25,7 @@ export const receiveDecks = decks => ({ type: types.RECEIVE_DECKS, data: decks }
 export const selectDeck = deck => ({ type: types.SELECT_DECK, data: deck });
 export const fetchDecks = () => (
   dispatch => (
-    fetch(`${url}/api/decks`, {
+    fetch(`${url}/api/decks/courses`, {
       credentials: 'same-origin',
     })
     .then(res => res.json())

@@ -67,7 +67,6 @@ class CreateAccount extends React.Component {
       teacherCode: this.state.teacherCode
     };
     $.post('/api/auth/create-account', newUser, () => {
-      console.log('newUser profile is:', newUser);
       Auth.signIn(this.state.email, this.state.password)
         .then(user => {
           this.props.onSignIn(user);
