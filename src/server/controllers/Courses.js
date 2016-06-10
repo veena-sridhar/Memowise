@@ -64,10 +64,9 @@ const getStudentsForCourse = (req, res) => {
 //currently any user who knew the course ID you could retrieve this info; for better security, you should need to be the appropriate teacher in order to retrieve your courses
   Course.findOne({_id: req.params.courseId})
   .then(course => {
-    User.find(
-      {_id: { $in: course.studentIds }}
-    )
+    User.find({_id: { $in: course.studentIds }})
     .then(students => {
+      console.log('students in getStudentsForCourse: ', students);
       const mappedStudents = students.map(student => {
         return {
           _id: student._id,
