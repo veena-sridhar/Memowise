@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Courses from '../components/Courses';
-import { selectCourse } from '../actions';
+import { fetchStudents, selectCourse } from '../actions';
 
 const mapStateToProps = ({ courses }) => ({ courses });
 // const mapDispatchToProps = (dispatch) => ({
@@ -8,5 +8,9 @@ const mapStateToProps = ({ courses }) => ({ courses });
 //     dispatch(selectCourse(course));
 //   }
 // });
+const mapDispatchToProps = (dispatch) => ({
+  fetchStudents: (courseId) => dispatch(fetchStudents(courseId)),
+  selectCourse: (course) => dispatch(selectCourse(course))
+});
 
 export default connect(mapStateToProps)(Courses);
