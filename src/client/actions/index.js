@@ -20,7 +20,7 @@ export const cancelAuthentication = () => (
   });
 
 export const receiveDecks = decks => ({ type: types.RECEIVE_DECKS, data: decks });
-export const selectDeck = deck => ({ type: types.SELECT_DECK, data: deck }); //might be fucking us up because may need to be included as part of new route
+export const selectDeck = deck => ({ type: types.SELECT_DECK, data: deck });
 export const fetchDecks = () => (
   dispatch => (
     fetch('/api/decks', {
@@ -30,7 +30,6 @@ export const fetchDecks = () => (
     .then(decks => dispatch(receiveDecks(decks)))
     .catch(err => dispatch(failedRequest(err)))
   ));
-
 
 export const receiveCard = card => ({ type: types.RECEIVE_CARD, data: card });
 export const fetchCard = (deckId) => {
@@ -71,6 +70,18 @@ export const savePlay = (play, rating) => {
     .catch(err => dispatch(failedRequest(err)))
   );
 };
+
+export const receiveCourses = courses => ({ type: types.RECEIVE_COURSES, data: courses });
+export const selectCourse = course => ({ type: types.SELECT_COURSE, data: course });
+export const fetchCourses = () => (
+  dispatch => (
+    fetch('/api/courses', {
+      credentials: 'same-origin',
+    })
+    .then(res => res.json())
+    .then(courses => dispatch(receiveCourses(courses)))
+    .catch(err => dispatch(failedRequest(err)))
+  ));
 
 export const addCourse = (courseName) => {
   const payload = JSON.stringify({ courseName });
@@ -122,6 +133,7 @@ export const addStudent = (courseId, email) => {
     .catch(err => dispatch(failedRequest(err)))
   );
 };
+
 
 export const receiveStudentDecks = studentDecks => ({ type: types.RECEIVE_STUDENT_DECKS, data: studentDecks });
 export const fetchStudentDecks = () => (
