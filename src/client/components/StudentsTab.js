@@ -18,8 +18,7 @@ class StudentsTab extends React.Component {
       credentials: 'same-origin'
     })
     .then(res => res.json())
-    .then(students => dispatch(receiveStudents(students)))
-    .catch(err => dispatch(failedRequest(err)))
+    .then(students => this.props.dispatch(receiveStudents(students)))
   }
 
   render() {
