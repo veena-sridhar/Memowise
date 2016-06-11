@@ -106,7 +106,7 @@ export const receiveStudents = students => ({ type: types.RECEIVE_STUDENTS, data
 export const fetchStudents = (courseId) => {
 
   return dispatch => (
-    fetch(`${url}/api/courses/${courseId}/students`, {
+    fetch(`/api/courses/${courseId}/students`, {
       credentials: 'same-origin'
     })
     .then(res => res.json())
@@ -119,7 +119,7 @@ export const addStudent = (courseId, email) => {
   const payload = JSON.stringify({ email });
 
   return dispatch => (
-    fetch(`${url}/api/courses/${courseId}/students`, {
+    fetch(`/api/courses/${courseId}/students`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
