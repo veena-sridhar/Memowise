@@ -9,7 +9,7 @@ const mapDispatchToState = (dispatch) => ({
   setDeckState: (studentDeck) => dispatch(selectStudentDeck(studentDeck)),
 });
 
-class DeckItem extends Component {
+class StudentDeckItem extends Component {
   constructor(props) {
     super(props);
     this.chooseDeckToStudy = this.chooseDeckToStudy.bind(this);
@@ -55,9 +55,9 @@ class DeckItem extends Component {
   }
 }
 
-DeckItem.propTypes = {
+StudentDeckItem.propTypes = {
   studentDeck: PropTypes.object.isRequired,
   setDeckState: PropTypes.func.isRequired,
 };
 
-export default connect(null, mapDispatchToState)(DeckItem);
+export default connect(null, mapDispatchToState)(StudentDeckItem);
