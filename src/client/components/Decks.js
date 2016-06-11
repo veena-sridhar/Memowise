@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import _ from 'lodash';
-import StudentDeckItem from './StudentDeckItem';
+import DeckItem from './DeckItem';
 
 const Decks = ({ studentDecks }) => (
   <div className="container">
@@ -8,7 +8,7 @@ const Decks = ({ studentDecks }) => (
     <div className="card-list">
       <div className="card-row">
         {_.map(studentDecks, function (deckSet, key) {
-          var decks = deckSet.map(function (deck, index) {return <StudentDeckItem studentDeck={deck} />});
+          var decks = deckSet.map(function (deck, index) {return <DeckItem deck={deck} key={index}/>});
           console.log('decks:', decks);
           return(
             <div>
@@ -24,18 +24,3 @@ const Decks = ({ studentDecks }) => (
 );
 
 export default Decks;
-
-
-
-
-//_.map(deckSet, function (deck, index) { return <DeckItem deck={deck} /> })
-
-// <h5>{index}</h5>
-
-            // return
-            // deckSet.map(function (deck, index) { return 
-            //   <h5>{key}</h5>
-            //   <StudentDeckItem studentDeck={deck} /> 
-            // }))
-
-            //className="center"

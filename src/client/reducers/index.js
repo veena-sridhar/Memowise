@@ -134,7 +134,6 @@ export const students = (state, action) => {
 };
 
 export const studentDecks = (state, action) => {
-  console.log('exporting student decks');
   switch (action.type) {
     case RECEIVE_STUDENT_DECKS: {
       return action.data || state;
@@ -145,7 +144,6 @@ export const studentDecks = (state, action) => {
 };
 
 export const studentDeck = (state, action) => {
-  console.log('exporting each individual deck');
   switch (action.type) {
     case SELECT_STUDENT_DECK: {
       return action.data || state;
