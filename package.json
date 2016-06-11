@@ -11,7 +11,7 @@
     "build-client-prod": "HOST=127.0.0.1 PORT=3333 PROTOCOL=http NODE_ENV=production webpack --watch --progress",
     "build-server-prod": "babel --watch src/server -d dist/server",
     "watch-client": "webpack --watch --progress",
-    "watch-server": "babel --watch src/server -d dist/server",
+    "watch-server": "babel --watch src/server -d dev/server",
     "server-dev": "nodemon dev/server/server.js",
     "server-prod": "HOST=127.0.0.1 PORT=3333 nodemon dist/server/server.js",
     "deploy:prod": "pm2 deploy ecosystem.json production",
