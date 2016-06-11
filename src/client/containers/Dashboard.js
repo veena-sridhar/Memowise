@@ -1,10 +1,7 @@
 import { connect } from 'react-redux';
 import Decks from '../components/Decks';
 
-const mapStateToProps = ({ studentDecks }) => {
-  console.log('dashbaord studentDecks:', studentDecks);
-  return ({ studentDecks });
-};
+const mapStateToProps = ({ studentDecks }) => ({ studentDecks });
 
 export default connect(mapStateToProps)(Decks);
 
