@@ -136,6 +136,7 @@ export const addStudent = (courseId, email) => {
 
 
 export const receiveStudentDecks = studentDecks => ({ type: types.RECEIVE_STUDENT_DECKS, data: studentDecks });
+export const selectStudentDeck = studentDeck => ({ type: types.SELECT_STUDENT_DECK, data: studentDeck });
 export const fetchStudentDecks = () => (
   dispatch => (
     fetch('/api/decks/courses', {
