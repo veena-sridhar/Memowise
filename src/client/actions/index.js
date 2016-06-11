@@ -2,8 +2,6 @@ import * as types from '../constants/actionTypes';
 import Auth from '../services/AuthService';
 import { config } from '../config';
 
-const url = `${config.api.protocol}://${config.api.host}:${config.api.port}`;
-
 export const failedRequest = error => ({ type: types.ERR_FAILED_REQUEST, data: error });
 
 export const signIn = user => ({ type: types.SIGN_IN, data: user });
@@ -25,7 +23,7 @@ export const receiveDecks = decks => ({ type: types.RECEIVE_DECKS, data: decks }
 export const selectDeck = deck => ({ type: types.SELECT_DECK, data: deck });
 export const fetchDecks = () => (
   dispatch => (
-    fetch(`${url}/api/decks`, {
+    fetch('/api/decks', {
       credentials: 'same-origin',
     })
     .then(res => res.json())
@@ -38,7 +36,7 @@ export const fetchCard = (deckId) => {
   const payload = JSON.stringify({ deckId });
 
   return dispatch => (
-    fetch(`${url}/api/card`, {
+    fetch('/api/card', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
@@ -59,7 +57,7 @@ export const savePlay = (play, rating) => {
   const payload = JSON.stringify({ ...play, rating });
 
   return dispatch => (
-    fetch(`${url}/api/play`, {
+    fetch('/api/play', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
@@ -77,7 +75,7 @@ export const receiveCourses = courses => ({ type: types.RECEIVE_COURSES, data: c
 export const selectCourse = course => ({ type: types.SELECT_COURSE, data: course });
 export const fetchCourses = () => (
   dispatch => (
-    fetch(`${url}/api/courses`, {
+    fetch('/api/courses', {
       credentials: 'same-origin',
     })
     .then(res => res.json())
@@ -89,7 +87,7 @@ export const addCourse = (courseName) => {
   const payload = JSON.stringify({ courseName });
 
   return dispatch => (
-    fetch(`${url}/api/courses`, {
+    fetch('/api/courses', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
