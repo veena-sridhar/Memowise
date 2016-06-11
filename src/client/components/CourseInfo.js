@@ -1,10 +1,10 @@
 import React from 'react';
-import { selectCourse } from '../actions';
+import { fetchStudents } from '../actions';
 import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 
 const mapDispatchToState = (dispatch) => ({
-  setCourseState: (course) => dispatch(selectCourse(course)),
+  fetchStudents: (courseId) => dispatch(fetchStudents(courseId)),
 });
 
 class CourseInfo extends React.Component {
@@ -15,18 +15,7 @@ class CourseInfo extends React.Component {
   }
 
   handleCourseClick() {
-    console.log('course >>>>', course);
-    this.props.dispatch(selectCourse(course))
-    // this.props.onCourseClick(this.props.course);
-    // fetch(`/api/courses/${this.props.params.courseId}/students`, {
-    //   credentials: 'same-origin'
-    // })
-    // .then(res => res.json())
-    // // .then(students => {
-    // //   this.setState({course: students})
-    // // })
-    // .then(students => dispatch(receiveStudents(students)))
-    // .catch(err => dispatch(failedRequest(err)))
+    this.props.fetchStudents(this.props.course._id);
     browserHistory.push(`/courses/${this.props.course._id}/students`);
   }
 
@@ -39,5 +28,4 @@ class CourseInfo extends React.Component {
   }
 }
 
-// export default CourseInfo
 export default connect(null, mapDispatchToState)(CourseInfo);
