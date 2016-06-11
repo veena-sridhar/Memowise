@@ -71,7 +71,11 @@ class CreateAccount extends React.Component {
       Auth.signIn(this.state.email, this.state.password)
         .then(user => {
           this.props.onSignIn(user);
-          browserHistory.push('/dashboard');
+          if (user.isTeacher) {
+            browserHistory.push('/courses');
+          } else {
+            browserHistory.push('/dashboard');
+          }
         })
         .catch(this.handleError);
     })
