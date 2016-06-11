@@ -10,6 +10,8 @@ export const RECEIVE_COURSES = 'RECEIVE_COURSES';
 export const SELECT_COURSE = 'SELECT_COURSE';
 export const ADD_COURSE = 'ADD_COURSE';
 
+export const RECEIVE_STUDENT_DECKS = 'RECEIVE_STUDENT_DECKS';
+
 export const RECEIVE_STUDENTS = 'RECEIVE_STUDENTS';
 export const ADD_STUDENT = 'ADD_STUDENT';
 
@@ -17,3 +19,4 @@ export const SIGN_IN = 'SIGN_IN';
 export const SIGN_OUT = 'SIGN_OUT';
 
 export const ERR_FAILED_REQUEST = 'ERR_FAILED_REQUEST';
+

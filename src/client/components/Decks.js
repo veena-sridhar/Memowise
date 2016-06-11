@@ -2,12 +2,12 @@ import React, { PropTypes } from 'react';
 import _ from 'lodash';
 import DeckItem from './DeckItem';
 
-const Decks = ({ decks }) => (
+const Decks = ({ studentDecks }) => (
   <div className="container">
     <h4 className="center grey-text text-darken-4">Decks</h4>
     <div className="card-list">
       <div className="card-columns">
-        {_.map(decks, function (deckSet, index) {
+        {_.map(studentDecks, function (deckSet, index) {
             return <h5>{index}</h5>
             _.map(deckSet, function (deck, index) { return <DeckItem key={index} deck={deck} /> }
           )})
@@ -16,10 +16,6 @@ const Decks = ({ decks }) => (
     </div>
   </div>
 );
-
-Decks.propTypes = {
-  decks: PropTypes.array.isRequired,
-};
 
 export default Decks;
 

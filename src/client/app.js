@@ -24,7 +24,7 @@ import StudyDeck from './containers/StudyDeck';
 import Courses from './containers/Courses';
 import StudentsTab from './components/StudentsTab';
 import DecksTab from './components/DecksTab';
-import { verifyAuthentication, fetchDecks, fetchCourses, fetchStudents } from './actions';
+import { verifyAuthentication, fetchDecks, fetchCourses, fetchStudents, fetchStudentDecks } from './actions';
 
 // services
 import Auth from './services/AuthService';
@@ -75,8 +75,9 @@ if (DEBUG) {
 
 store.dispatch(verifyAuthentication());
 store.dispatch(fetchDecks());
-store.dispatch(fetchCourses());
 store.dispatch(fetchStudents());
+store.dispatch(fetchStudentDecks());
+store.dispatch(fetchCourses());
 
 // just for inspection
 window.store = store;
