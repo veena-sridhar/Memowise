@@ -8,7 +8,14 @@ const Decks = ({ studentDecks }) => (
     <div className="card-list">
       <div className="card-columns">
         {_.map(studentDecks, function (deckSet, key) {
-            return deckSet.map(function (deck, index) { return <StudentDeckItem studentDeck={deck} /> })
+          var decks = deckSet.map(function (deck, index) {return <StudentDeckItem studentDeck={deck} />});
+          console.log('decks:', decks);
+          return(
+            <div>
+              <h5>{key}</h5>
+              <div>{decks}</div>
+            </div>
+            )  
           })
         }
       </div>
@@ -24,3 +31,9 @@ export default Decks;
 //_.map(deckSet, function (deck, index) { return <DeckItem deck={deck} /> })
 
 // <h5>{index}</h5>
+
+            // return
+            // deckSet.map(function (deck, index) { return 
+            //   <h5>{key}</h5>
+            //   <StudentDeckItem studentDeck={deck} /> 
+            // }))
