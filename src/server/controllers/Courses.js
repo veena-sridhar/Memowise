@@ -5,7 +5,7 @@ import Deck from '../models/Deck';
 const addCourse = (req, res) => {
   return Course.create({
       courseName: req.body.courseName,
-      teacherId: req.user._id //teacherID: '5758dd2a0fe3293550c9a40d'
+      teacherId: req.user._id 
     }).then(course => {
       const created = course.toObject();
       res.status(201).json(created);
@@ -59,14 +59,12 @@ const addStudentToCourse = (req, res) => {
 };
 
 const getStudentsForCourse = (req, res) => { 
-  console.log('req.body in getStudentsForCourse: ', req.body);
-  console.log('req.params in getStudentsForCourse: ', req.params);
-//currently any user who knew the course ID you could retrieve this info; for better security, you should need to be the appropriate teacher in order to retrieve your courses
+//currently any user who knew the course ID you could retrieve this info; for better security, 
+//you should need to be the appropriate teacher in order to retrieve your courses
   Course.findOne({_id: req.params.courseId})
   .then(course => {
     User.find({_id: { $in: course.studentIds }})
     .then(students => {
-      console.log('students in getStudentsForCourse: ', students);
       const mappedStudents = students.map(student => {
         return {
           _id: student._id,
@@ -102,7 +100,7 @@ const getStudentsForCourse = (req, res) => {
 
 const addDeckToCourse = (req, res) => {  
   Course.update(
-    {_id:  req.params.courseId}, //ObjectId(
+    {_id:  req.params.courseId}, 
     {$addToSet: {deckIds: req.body._id}}
   ).then(course => {
     res.status(201).json(course);
@@ -115,15 +113,13 @@ const addDeckToCourse = (req, res) => {
   });
 };
 
-const getDecksForCourse = (req, res) => { //currently any user who knew the course ID you could retrieve this info; for better security, you should need to be the appropriate teacher in order to retrieve your courses
+const getDecksForCourse = (req, res) => { 
   Course.findOne({_id: req.params.courseId})
   .then(course => {
-    console.log('course:', course);
     Deck.find(
       {_id: { $in: course.deckIds }}
     )
     .then(decks => {
-      console.log('decks:', decks);
       const response = {
         _id: course._id,
         courseName: course.courseName,
